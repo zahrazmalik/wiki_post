@@ -1,0 +1,38 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Wiki Posts</h1>
+
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+  <thead>
+    <tr style="background-color: #f8f9fa;">
+      <th style="padding: 10px; border-bottom: 2px solid #dee2e6; text-align: left;">Title</th>
+      <th style="padding: 10px; border-bottom: 2px solid #dee2e6; text-align: left;">Author</th>
+      <th style="padding: 10px; border-bottom: 2px solid #dee2e6; text-align: left;">Created at</th>
+      <th style="padding: 10px; border-bottom: 2px solid #dee2e6; text-align: left;">Updated at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @wiki_posts.each_with_index do |post, i| %>
+      <tr style="background-color: <%= i.even? ? '#ffffff' : '#f1f3f4' %>;">
+        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">
+          <%= link_to post.title, wiki_post_path(post), style: "font-weight: bold; color: #007bff; text-decoration: none;" %>
+        </td>
+        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">
+          <%= post.author %>
+        </td>
+        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">
+          <%= post.created_at.strftime('%B %d, %Y') %>
+        </td>
+        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">
+          <%= post.updated_at.strftime('%B %d, %Y') %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div style="display: flex; gap: 18px; justify-content: center; margin-top: 28px;">
+  <%= link_to "New wiki post", new_wiki_post_path, style: "background: #007bff; color: #fff; padding: 10px 22px; border-radius: 5px; text-decoration: none; font-weight: bold;" %>
+  <%= link_to "About", about_path, style: "background: #28a745; color: #fff; padding: 10px 22px; border-radius: 5px; text-decoration: none; font-weight: bold;" %>
+  <%= link_to "Home", root_path, style: "background: #6c757d; color: #fff; padding: 10px 22px; border-radius: 5px; text-decoration: none; font-weight: bold;" %>
+</div>

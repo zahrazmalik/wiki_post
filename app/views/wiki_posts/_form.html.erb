@@ -1,0 +1,33 @@
+<%= form_with(model: wiki_post, local: true) do |form| %>
+  <% if wiki_post.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(wiki_post.errors.count, "error") %> prohibited this wiki_post from being saved:</h2>
+
+      <ul>
+        <% wiki_post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="margin-bottom: 16px;">
+    <%= form.label :title, style: "display: block; font-weight: bold; margin-bottom: 6px;" %>
+    <%= form.text_field :title, style: "width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" %>
+  </div>
+
+  <div style="margin-bottom: 16px;">
+    <%= form.label :author, style: "display: block; font-weight: bold; margin-bottom: 6px;" %>
+    <%= form.text_field :author, style: "width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" %>
+  </div>
+
+  <div style="margin-bottom: 16px;">
+    <%= form.label :description, style: "display: block; font-weight: bold; margin-bottom: 6px;" %>
+    <%= form.text_area :description, rows: 3, style: "width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" %>
+  </div>
+
+  <div style="text-align: center;">
+    <%= form.submit style: "background: #007bff; color: #fff; padding: 10px 24px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;" %>
+  </div>
+  <%= form.file_field :image, as: :file, style: "margin-top: 16px;" %>
+<% end %>

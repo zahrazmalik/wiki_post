@@ -1,0 +1,39 @@
+<% content_for :title, @wiki_post.title %>
+
+<div style="max-width: 700px; margin: 40px auto; background: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 36px;">
+  <h1 style="color: #343a40; margin-bottom: 12px;"><%= @wiki_post.title.titleize %></h1>
+  <% if @wiki_post.image.attached? %>
+    <div style="margin-bottom: 24px;">
+      <%= image_tag @wiki_post.image, style: "max-width: 100%; border-radius: 8px;" %>
+    </div>
+  <% end %>
+  <p style="color: #6c757d; margin-bottom: 8px;">
+    <strong>Author:</strong>
+    <span style="color: #495057;"><%= @wiki_post.author.presence || "Unknown" %></span>
+  </p>
+  <p style="color: #6c757d; margin-bottom: 24px;">
+    <strong>Created on:</strong>
+    <span style="color: #495057;"><%= @wiki_post.created_at.strftime("%B %d, %Y") %></span>
+  </p>
+  <% if @wiki_post.description.present? %>
+    <div style="font-size: 1.08em; color: #444; margin-bottom: 24px; background: #e9ecef; border-radius: 6px; padding: 14px 18px;">
+      <strong>Description:</strong>
+      <div><%= simple_format(@wiki_post.description) %></div>
+    </div>
+  <% end %>
+  <% if @wiki_post.respond_to?(:content) && @wiki_post.content.present? %>
+    <div style="font-size: 1.15em; line-height: 1.7; color: #222; margin-bottom: 32px;">
+      <%= simple_format(@wiki_post.content) %>
+    </div>
+  <% end %>
+
+  <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 24px;">
+    <%= link_to "✏️ Edit", edit_wiki_post_path(@wiki_post), style: "background: #007bff; color: #fff; padding: 10px 22px; border-radius: 5px; text-decoration: none; font-weight: bold;" %>
+    <%= link_to "← Back", wiki_posts_path, style: "background: #6c757d; color: #fff; padding: 10px 22px; border-radius: 5px; text-decoration: none; font-weight: bold;" %>
+    <%= link_to "＋ New", new_wiki_post_path, style: "background: #28a745; color: #fff; padding: 10px 22px; border-radius: 5px; text-decoration: none; font-weight: bold;" %>
+    <%= button_to "🗑️ Delete", @wiki_post,
+  method: :delete,
+  data: { turbo_confirm: "Are you sure you want to delete this #{@wiki_post.title}?" },
+  style: "background: #dc3545; color: #fff; padding: 10px 22px; border-radius: 5px; font-weight: bold; border: none;" %>
+  </div>
+</div>
